@@ -1,0 +1,10 @@
+﻿@page "/ventas/new"
+@inject NavigationManager NavigationManager
+
+<h3>Create Venta</h3>
+
+ <VentasForm Venta = "NuevaVenta" />
+
+@code {
+    private Venta NuevaVenta = new();
+}

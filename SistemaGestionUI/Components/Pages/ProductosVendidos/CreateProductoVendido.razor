@@ -1,0 +1,10 @@
+﻿@page "/productosvendidos/new"
+@inject NavigationManager NavigationManager
+
+<h3>Create Producto Vendido</h3>
+
+<ProductosVendidosForm ProductoVendido="NuevoProductoVendido" />
+
+@code {
+    private ProductoVendido NuevoProductoVendido = new();
+}

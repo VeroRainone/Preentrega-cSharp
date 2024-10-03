@@ -1,0 +1,26 @@
+﻿@page "/usuarios/{id:int}/editar"
+@inject NavigationManager NavigationManager
+@inject UsuariosBusiness Business
+
+<h3>Edit Usuario</h3>
+
+@if (usuario == null)
+{
+    <p>Usuario no encontrado</p>
+}
+else
+{
+    <UsuariosForm Usuario="usuario" />
+}
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private Usuario? usuario;
+
+    protected override void OnInitialized()
+    {
+        usuario = Business.GetOneUsuario(Id);
+    }
+}

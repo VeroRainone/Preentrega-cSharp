@@ -1,0 +1,60 @@
+﻿@page "/productosvendidos"
+@inject NavigationManager NavigationManager
+@inject ProductosVendidosBusiness Business
+
+<h3>Productos Vendidos</h3>
+<div class=" container">
+    <div class="row">
+        <div class="col-6">
+            <a href="/productosvendidos/new">
+                <button type="button" class="btn btn-success">Crear</button>
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Id</th>
+                    <th>IdProducto</th>
+                    <th>Stock</th>
+                    <th>IdVenta</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (ProductoVendido productovendido in productosvendidos)
+                {
+                    <tr>
+                        <td>@productovendido.Id</td>
+                        <td>@productovendido.IdProducto</td>
+                        <td>@productovendido.Stock</td>
+                        <td>@productovendido.IdVenta</td>
+                        <td>
+                            <a href="/productosvendidos/@productovendido.Id/Editar">Editar </a>
+                        </td>
+                        <td>
+                            <button @onclick="@(() => EliminarProductoVendido(productovendido.Id))" class="btn btn-danger">
+                                Eliminar
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@code {
+    private List<ProductoVendido> productosvendidos = [];
+
+    protected override void OnInitialized()
+    {
+        productosvendidos = Business.GetProductosVendidos();
+    }
+    private void EliminarProductoVendido(int id)
+    {
+        Business.DeleteProductoVendido(id);
+
+        productosvendidos = Business.GetProductosVendidos();
+    }
+}

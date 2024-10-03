@@ -1,0 +1,10 @@
+﻿@page "/usuarios/new"
+@inject NavigationManager NavigationManager
+
+<h3>Create Usuario</h3>
+
+<UsuariosForm Usuario="NuevoUsuario" />
+
+@code {
+    private Usuario NuevoUsuario = new();
+}

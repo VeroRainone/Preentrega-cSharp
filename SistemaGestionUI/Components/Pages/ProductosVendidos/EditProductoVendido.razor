@@ -1,0 +1,27 @@
+﻿@page "/productosvendidos/{id:int}/editar"
+@inject NavigationManager NavigationManager
+@inject ProductosVendidosBusiness Business
+
+<h3>Edit Producto Vendido</h3>
+
+@if (ProductoVendido?.Id == null)
+{
+    <p>No existe el Producto Vendido</p>
+}
+else
+{
+    <ProductosVendidosForm ProductoVendido="ProductoVendido" />
+}
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private ProductoVendido? ProductoVendido;
+
+    protected override void OnInitialized()
+    {
+        ProductoVendido = Business.GetOneProductoVendido(Id);
+    }
+}
+

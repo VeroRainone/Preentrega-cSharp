@@ -1,0 +1,42 @@
+﻿@inject NavigationManager NavigationManager
+@inject VentasBusiness Business
+
+<EditForm Model="Venta" OnValidSubmit="CrearOActualizarVenta" FormName="Ventas-form">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="form-group">
+        <label for="comentarios">
+            Comentarios
+            <InputText type="text" class="form-control" id="comentarios" @bind-Value="Venta.Comentarios" />
+        </label>
+    </div>
+    <div class="form-group">
+        <label for="IdUsuario">
+            Id Usuario
+            <InputNumber type="number" class="form-control" id="IdUsuario" @bind-Value="Venta.IdUsuario" />
+        </label>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+</EditForm>
+
+@code {
+    [Parameter]
+    public Venta? Venta { get; set; }
+    protected override void OnInitialized() { }
+
+    public void CrearOActualizarVenta()
+    {
+        if (Venta != null)
+        {
+            if (Venta.Id > 0)
+            {
+                Business.UpdateVenta(Venta.Id, Venta);
+            }
+            else
+            {
+                Business.InsertVenta(Venta);
+            }
+            NavigationManager.NavigateTo("/ventas");
+        }
+    }
+}
